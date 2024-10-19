@@ -11,7 +11,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: "Roboto Mono", monospace, "Inter", sans-serif;
+    font-family: "Inter", sans-serif, "Roboto Mono", monospace, ;
     font-optical-sizing: auto;
     font-weight: weight;
     font-style: normal;
@@ -37,16 +37,9 @@ export const GlobalStyle = createGlobalStyle`
 `;
 
 export const Button = styled.button`
-  background-color: #3498db;
-  color: white;
-  border: none;
   padding: 0.5rem 1rem;
   border-radius: 5px;
   cursor: pointer;
-
-  &:hover {
-    background-color: #2980b9;
-  }
 `;
 
 export const Container = styled.div`
@@ -55,27 +48,7 @@ export const Container = styled.div`
   padding: 1rem;
 `;
 
-export const Row = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  margin: -0.5rem;
-`;
-
-export const Col = styled.div`
-  flex: 1;
-  padding: 0.5rem;
-  min-width: 200px;
-
-  @media (max-width: 1200px) {
-    flex: 50%;
-  }
-
-  @media (max-width: 768px) {
-    flex: 100%;
-  }
-`;
-
-export const Paragraph = styled.p`
+export const Paragraph = styled.span`
   margin-bottom: 1rem;
 `;
 
@@ -85,32 +58,4 @@ export const Input = styled.input`
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 1rem;
-`;
-
-export const Textarea = styled.textarea`
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 1rem;
-`;
-
-export const MobileStyles = createGlobalStyle`
-  @media (max-width: 480px) {
-    body {
-      padding: 1rem;
-    }
-
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    h2 {
-      font-size: 1.25rem;
-    }
-
-    ${Button} {
-      width: 100%;
-    }
-  }
 `;

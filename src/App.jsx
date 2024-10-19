@@ -1,7 +1,9 @@
+import Header from "./components/Header";
+
 const App = () => {
   return (
     <>
-      <p>Vite and React with Scroll Infinity</p>
+      <Header />
     </>
   );
 };

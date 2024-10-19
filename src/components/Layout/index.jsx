@@ -1,28 +1,49 @@
 import { useState } from "react";
 import { Header } from "../Header";
-import { Grid } from "./styles";
 import { Content } from "../Content";
 import { FilterButton } from "../FilterButton";
 import { SearchBar } from "../SearchBar";
 import { UserList } from "../UserList";
+import { LoadMoreButton } from "../LoadMoreButton";
+import { Grid } from "./styles";
 
 export function Layout() {
   const [filterText, setFilterText] = useState("");
+  const [page, setPage] = useState(0);
+  const [loadUsers, setLoadUsers] = useState(false);
+  const [hasMoreUsers, setHasMoreUsers] = useState(true);
 
   const handleFilter = () => {
-    console.log("Filtering with:", filterText);
+    setLoadUsers(true);
+    setPage(1);
+  };
+
+  const loadMoreUsers = async () => {
+    if (hasMoreUsers) {
+      setPage((prev) => prev + 1);
+    }
   };
 
   return (
     <Grid>
       <Header />
       <Content>
+        <>
           <SearchBar
             placeholder="Buscar por nome ou e-mail"
             onChange={(e) => setFilterText(e.target.value)}
           />
           <FilterButton onClick={handleFilter}>Buscar</FilterButton>
-      <UserList/>
+        </>
+        <>
+          <LoadMoreButton onClick={loadMoreUsers} />
+
+          <UserList
+            page={page}
+            filterText={filterText}
+            setHasMoreUsers={setHasMoreUsers}
+          />
+        </>
       </Content>
     </Grid>
   );

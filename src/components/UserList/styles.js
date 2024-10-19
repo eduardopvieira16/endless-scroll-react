@@ -1,11 +1,13 @@
 import styled from "styled-components";
 
-const UserListContainer = styled.div`
+const ListContainer = styled.div`
   display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
   padding: 20px;
 `;
 
-const UserListItem = styled.li`
+const ListItem = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
@@ -13,16 +15,4 @@ const UserListItem = styled.li`
   list-style: none;
 `;
 
-const UserPicture = styled.img`
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  margin-right: 10px;
-`;
-
-const UserName = styled.span`
-  font-size: 16px;
-  font-weight: 500;
-`;
-
-export { UserListContainer, UserListItem, UserPicture, UserName };
+export { ListContainer, ListItem };

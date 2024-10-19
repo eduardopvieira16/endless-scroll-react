@@ -20,6 +20,17 @@ const LoadMoreContainer = styled.div`
     &:hover {
       background-color: darkred;
     }
+
+    @media (max-width: 768px) {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+
+    @media (max-width: 480px) {
+      padding: 6px 12px;
+      font-size: 12px;
+      width: 100%;
+    }
   }
 `;
 

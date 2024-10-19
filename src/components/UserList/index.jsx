@@ -14,12 +14,13 @@ export function UserList({ page, filterText, setHasMoreUsers }) {
   const fetchUsers = useCallback(async () => {
     setLoading(true);
     try {
-      const response = await axiosSetting.get(`?results=10&page=${page}`);
+      const response = await axiosSetting.get(`?results=16&page=${page}`);
       const fetchedUsers = response.data.results.map((user, index) => ({
         id: `${page}-${index + 1}`,
         name: `${user.name.first} ${user.name.last}`,
         picture: user.picture.thumbnail,
         email: user.email,
+        country: user.location.country
       }));
 
       setUsers((prevUsers) => [...prevUsers, ...fetchedUsers]);

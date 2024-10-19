@@ -36,13 +36,12 @@ export function Layout() {
           <FilterButton onClick={handleFilter}>Buscar</FilterButton>
         </>
         <>
-          <LoadMoreButton onClick={loadMoreUsers} />
-
           <UserList
             page={page}
             filterText={filterText}
             setHasMoreUsers={setHasMoreUsers}
           />
+          <LoadMoreButton onClick={loadMoreUsers} />
         </>
       </Content>
     </Grid>

@@ -14,7 +14,7 @@ const Container = styled.div`
   justify-content: flex-start;
 
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
 
   ::-webkit-scrollbar-thumb {
@@ -32,7 +32,7 @@ const FlexContainer = styled.div`
   flex-direction: column;
   align-items: center;
   margin-bottom: 20px;
-  width: 50%;
+  width: 100%;
 `;
 
 export { Container, FlexContainer };

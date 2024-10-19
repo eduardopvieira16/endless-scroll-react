@@ -1,7 +1,9 @@
 import styled from "styled-components";
 
-export const SearchContainer = styled.div`
+const SearchContainer = styled.div`
   width: 100%;
-  max-width: 500px;
+  max-width: 800px;
   margin: 10px 0;
 `;
+
+export { SearchContainer };

@@ -1,11 +1,9 @@
 import { Container } from "./styles";
 
-const Header = () => {
+export function Header() {
   return (
     <Container>
       <p>Sinnc Users</p>
     </Container>
   );
 }
-
-export default Header;

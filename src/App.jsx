@@ -1,10 +1,11 @@
-import Layout from "./components/Layout";
+import { Layout } from "./components/Layout";
 
-const App = () => {
+function App() {
   return (
     <>
-      <Layout/>
+      <Layout />
     </>
   );
-};
+}
+
 export default App;

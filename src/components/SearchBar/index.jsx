@@ -1,12 +1,10 @@
-import Input from "../Input";
+import { Input } from "../Input";
 import { SearchContainer } from "./styles";
 
-const SearchBar = ({ placeholder, onChange }) => {
+export function SearchBar({ placeholder }) {
   return (
     <SearchContainer>
-      <Input type="text" placeholder={placeholder} onChange={onChange} />
+      <Input type="text" placeholder={placeholder} />
     </SearchContainer>
   );
-};
-
-export default SearchBar;
+}

@@ -1,46 +1,16 @@
-import { useState, useEffect, useCallback } from "react";
-
 import { ListContainer, ListItem } from "./styles";
-
-import { axiosSetting } from "../../services/api/axiosSetting";
+import { useUserContext } from "../../context/UserContext";
+import { useFetchUsers } from "../../hooks/useFetchUsers"; // Ajuste a importação do hook
 import { Card } from "../Card";
 
-export function UserList({ page, filterText, setHasMoreUsers }) {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [hasMore, setHasMore] = useState(true);
+export function UserList({ page }) {
+  const { users, loading, error } = useUserContext();
 
-  const fetchUsers = useCallback(async () => {
-    setLoading(true);
-    try {
-      const response = await axiosSetting.get(`?results=16&page=${page}`);
-      const fetchedUsers = response.data.results.map((user, index) => ({
-        id: `${page}-${index + 1}`,
-        name: `${user.name.first} ${user.name.last}`,
-        picture: user.picture.thumbnail,
-        email: user.email,
-        country: user.location.country
-      }));
+  useFetchUsers(page);
 
-      setUsers((prevUsers) => [...prevUsers, ...fetchedUsers]);
-
-      if (response.data.results.length < 10) {
-        setHasMoreUsers(false);
-      }
-    } catch (err) {
-      setError("Erro ao carregar os usuários.");
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  }, [page, setHasMoreUsers]);
-
-  useEffect(() => {
-    if (page > 0) {
-      fetchUsers();
-    }
-  }, [page, fetchUsers]);
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (error) {
     return <div>{error}</div>;

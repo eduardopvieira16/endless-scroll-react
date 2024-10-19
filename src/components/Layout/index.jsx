@@ -1,28 +1,15 @@
-import { useState } from "react";
 import { Header } from "../Header";
 import { Content } from "../Content";
 import { FilterButton } from "../FilterButton";
 import { SearchBar } from "../SearchBar";
 import { UserList } from "../UserList";
-import { LoadMoreButton } from "../LoadMoreButton";
 import { Grid } from "./styles";
+import { LoadMoreButton } from "../LoadMoreButton";
+import { useLayoutContext } from "../../context/LayoutContext";
 
 export function Layout() {
-  const [filterText, setFilterText] = useState("");
-  const [page, setPage] = useState(0);
-  const [loadUsers, setLoadUsers] = useState(false);
-  const [hasMoreUsers, setHasMoreUsers] = useState(true);
-
-  const handleFilter = () => {
-    setLoadUsers(true);
-    setPage(1);
-  };
-
-  const loadMoreUsers = async () => {
-    if (hasMoreUsers) {
-      setPage((prev) => prev + 1);
-    }
-  };
+  const { filterText, setFilterText, page, handleFilter, loadMoreUsers } =
+    useLayoutContext();
 
   return (
     <Grid>
@@ -36,11 +23,7 @@ export function Layout() {
           <FilterButton onClick={handleFilter}>Buscar</FilterButton>
         </>
         <>
-          <UserList
-            page={page}
-            filterText={filterText}
-            setHasMoreUsers={setHasMoreUsers}
-          />
+          <UserList page={page} filterText={filterText} />
           <LoadMoreButton onClick={loadMoreUsers} />
         </>
       </Content>

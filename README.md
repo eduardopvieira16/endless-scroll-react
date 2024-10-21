@@ -10,6 +10,20 @@ O **Endless Scroll React** é uma aplicação desenvolvida com React que impleme
 - **Styled-components**: Para estilização de componentes de forma dinâmica.
 - **Styled-normalize e Normalize.css**: Para normalização de estilos em diferentes navegadores.
 
+### Package.json
+
+Foi adicionado o proxy para evitar o erro no console:
+
+```bash
+  Access to XMLHttpRequest at 'https://randomuser.me/api/?page=6&results=20' from origin 'http://localhost:5173' has been blocked by CORS policy: No 'Access-Control-Allow-Origin' header is present on the requested resource.
+```
+
+
+
+```json
+  "proxy": "https://randomuser.me"
+```
+
 ### Dependências
 
 ```json

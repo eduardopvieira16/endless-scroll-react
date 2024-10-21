@@ -13,17 +13,6 @@ const CardContainer = styled.div`
 
   width: 250px;
   height: 250px;
-
-  @media (max-width: 768px) {
-    width: 200px;
-    height: 200px;
-  }
-
-  @media (max-width: 480px) {
-    width: 100%;
-    height: auto;
-    margin: 5px;
-  }
 `;
 
 export { CardContainer };

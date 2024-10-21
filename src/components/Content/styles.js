@@ -5,7 +5,7 @@ const Container = styled.div`
   color: #333;
   background-color: #f4f4f4;
   padding: 20px;
-  height: calc(100vh - 70px);
+  height: calc(100vh - 80px);
   overflow-y: auto;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -25,15 +25,6 @@ const Container = styled.div`
   ::-webkit-scrollbar-track {
     background-color: blue;
   }
-
-  @media (max-width: 768px) {
-    padding: 15px;
-  }
-
-  @media (max-width: 480px) {
-    padding: 10px;
-    height: calc(100vh - 50px);
-  }
 `;
 
 const FlexContainer = styled.div`
@@ -42,15 +33,6 @@ const FlexContainer = styled.div`
   align-items: center;
   margin-bottom: 20px;
   width: 100%;
-
-  @media (max-width: 768px) {
-    margin-bottom: 15px;
-  }
-
-  @media (max-width: 480px) {
-    margin-bottom: 10px;
-    padding: 0 5px;
-  }
 `;
 
 export { Container, FlexContainer };

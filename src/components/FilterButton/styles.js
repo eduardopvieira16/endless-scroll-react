@@ -13,19 +13,6 @@ const StyledButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
-
-  @media (max-width: 768px) {
-    margin-left: 20px;
-    padding: 8px 16px;
-    font-size: 14px;
-  }
-
-  @media (max-width: 480px) {
-    margin-left: 10px;
-    padding: 6px 12px;
-    font-size: 12px;
-    width: 100%;
-  }
 `;
 
 export { StyledButton };

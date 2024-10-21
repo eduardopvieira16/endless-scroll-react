@@ -1,6 +1,6 @@
-import { useErrorContext } from './ErrorContext';
+import { useErrorHandlerContext } from "../context/errorHandlerContext";
 
 export const useErrorHandler = () => {
-  const showError = useErrorContext();
+  const showError = useErrorHandlerContext();
   return showError;
 };

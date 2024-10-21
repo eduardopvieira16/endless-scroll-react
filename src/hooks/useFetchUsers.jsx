@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useUserContext } from "../context/UserContext";
 import { axiosSetting } from "../services/api/axiosSetting";
-import { useErrorHandlerContext } from "../context/errorHandlerContext";
+import { useErrorContext } from "../context/ErrorContext";
 
 export function useFetchUsers(page) {
   const { setUsers, setHasMore } = useUserContext();
-  const showError = useErrorHandlerContext();
+  const { showError } = useErrorContext();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,7 +33,6 @@ export function useFetchUsers(page) {
         setLoading(false);
       }
     };
-
 
     if (page > 0) {
       fetchUsers();

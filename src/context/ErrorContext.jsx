@@ -15,13 +15,13 @@ export const ErrorProvider = ({ children }) => {
   };
 
   return (
-    <ErrorContext.Provider value={showError}>
+    <ErrorContext.Provider value={{ showError, closeError }}>
       {children}
       {error && <ErrorModal message={error} onClose={closeError} />}
     </ErrorContext.Provider>
   );
 };
 
-export const useErrorHandler = () => {
+export const useErrorContext = () => {
   return useContext(ErrorContext);
 };

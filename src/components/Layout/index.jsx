@@ -5,6 +5,7 @@ import { FilterButton } from "../FilterButton";
 import { SearchBar } from "../SearchBar";
 import { UserList } from "../UserList";
 import { Grid } from "./styles";
+import { ErrorProvider } from "../../context/ErrorContext";
 
 export function Layout() {
   const [filterText, setFilterText] = useState("");
@@ -17,24 +18,26 @@ export function Layout() {
 
   return (
     <Grid>
-      <Header />
-      <Content>
-        <>
-          <SearchBar
-            placeholder="Buscar por nome ou e-mail"
-            onChange={(e) => setFilterText(e.target.value)}
-          />
-          <FilterButton onClick={handleFilter}>Buscar</FilterButton>
-        </>
-        <>
-          <UserList
-            page={page}
-            filterText={filterText}
-            setHasMoreUsers={setHasMoreUsers}
-            setPage={setPage}
-          />
-        </>
-      </Content>
+      <ErrorProvider>
+        <Header />
+        <Content>
+          <>
+            <SearchBar
+              placeholder="Buscar por nome ou e-mail"
+              onChange={(e) => setFilterText(e.target.value)}
+            />
+            <FilterButton onClick={handleFilter}>Buscar</FilterButton>
+          </>
+          <>
+            <UserList
+              page={page}
+              filterText={filterText}
+              setHasMoreUsers={setHasMoreUsers}
+              setPage={setPage}
+            />
+          </>
+        </Content>
+      </ErrorProvider>
     </Grid>
   );
 }

@@ -1,9 +1,11 @@
 import { useEffect, useState } from "react";
-import { useLayoutContext } from "../context/LayoutContext";
+import { useUserContext } from "../context/UserContext";
 import { axiosSetting } from "../services/api/axiosSetting";
+import { useErrorHandlerContext } from "../context/errorHandlerContext";
 
 export function useFetchUsers(page) {
-  const { setUsers, setHasMoreUsers } = useLayoutContext();
+  const { setUsers, setHasMore } = useUserContext();
+  const showError = useErrorHandlerContext();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -11,23 +13,32 @@ export function useFetchUsers(page) {
       try {
         setLoading(true);
         const response = await axiosSetting.get(`?page=${page}&results=20`);
-        const newUsers = response.data.results;
-        setUsers((prev) => [...prev, ...newUsers]);
+        const fetchedUsers = response.data.results.map((user) => ({
+          id: user.login.uuid || `${user.name.first}-${user.name.last}-${page}`,
+          name: `${user.name.first} ${user.name.last}`,
+          picture: user.picture.thumbnail,
+          email: user.email,
+          country: user.location.country,
+        }));
 
-        if (newUsers.length === 0) {
-          setHasMoreUsers(false);
+        setUsers((prev) => [...prev, ...fetchedUsers]);
+
+        if (fetchedUsers.length < 20) {
+          setHasMore(false);
         }
       } catch (error) {
+        showError("Erro ao carregar usuários.");
         console.error("Erro ao carregar usuários:", error);
       } finally {
         setLoading(false);
       }
     };
 
+
     if (page > 0) {
       fetchUsers();
     }
-  }, [page, setUsers, setHasMoreUsers]);
+  }, [page, setUsers, setHasMore, showError]);
 
   return { loading };
 }

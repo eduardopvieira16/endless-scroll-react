@@ -1,28 +1,51 @@
+import { useEffect, useRef } from "react";
+import { useLayoutContext } from "../../context/LayoutContext";
+import { useFetchUsers } from "../../hooks/useFetchUsers";
 import { ListContainer, ListItem } from "./styles";
-import { useUserContext } from "../../context/UserContext";
-import { useFetchUsers } from "../../hooks/useFetchUsers"; // Ajuste a importação do hook
-import { Card } from "../Card";
 
-export function UserList({ page }) {
-  const { users, loading, error } = useUserContext();
+export function UserList() {
+  const { users, page, loadMoreUsers, hasMoreUsers } = useLayoutContext();
+  const { loading } = useFetchUsers(page);
+  const observerRef = useRef();
 
-  useFetchUsers(page);
+  useEffect(() => {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && hasMoreUsers && !loading) {
+        loadMoreUsers();
+      }
+    });
 
-  if (loading) {
-    return <div>Loading...</div>;
-  }
+    if (observerRef.current) {
+      observer.observe(observerRef.current);
+    }
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+    return () => {
+      if (observerRef.current) {
+        observer.unobserve(observerRef.current);
+      }
+    };
+  }, [loadMoreUsers, hasMoreUsers, loading]);
+
+  /*
+  <ListContainer>
+{users.map((user) => (
+  <ListItem key={user.id}>
+    <Card user={user} />
+  </ListItem>
+))}
+</ListContainer>
+  */
 
   return (
     <ListContainer>
-      {users.map((user) => (
-        <ListItem key={user.id}>
-          <Card user={user} />
+      {users.map((user, index) => (
+        <ListItem key={index}>
+          {user.name.first} {user.name.last}
         </ListItem>
       ))}
+      <div ref={observerRef} style={{ height: "1px" }} />
+      {loading && <p>Carregando...</p>}
+      {!hasMoreUsers && <p>Todos os usuários carregados.</p>}
     </ListContainer>
   );
 }

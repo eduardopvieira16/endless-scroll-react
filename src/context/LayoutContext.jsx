@@ -4,11 +4,13 @@ const LayoutContext = createContext();
 
 export function LayoutProvider({ children }) {
   const [filterText, setFilterText] = useState("");
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
+  const [users, setUsers] = useState([]);
   const [hasMoreUsers, setHasMoreUsers] = useState(true);
 
   const handleFilter = () => {
     setPage(1);
+    setUsers([]);
   };
 
   const loadMoreUsers = () => {
@@ -24,6 +26,8 @@ export function LayoutProvider({ children }) {
         setFilterText,
         page,
         setPage,
+        users,
+        setUsers,
         hasMoreUsers,
         setHasMoreUsers,
         handleFilter,

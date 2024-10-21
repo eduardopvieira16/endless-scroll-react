@@ -21,13 +21,14 @@ export function Layout() {
       <ErrorProvider>
         <Header />
         <Content>
-          <>
+          {/*<>
+          Pode ser implementada o filtro de busca corretamente, no momento ja esta criado o componente. Falta implementar a logica de maneira correta
             <SearchBar
               placeholder="Buscar por nome ou e-mail"
               onChange={(e) => setFilterText(e.target.value)}
             />
             <FilterButton onClick={handleFilter}>Buscar</FilterButton>
-          </>
+          </> */}
           <>
             <UserList
               page={page}

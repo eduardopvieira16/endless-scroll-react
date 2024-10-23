@@ -4,44 +4,26 @@ import { axiosSetting } from "./axiosConfig";
 const ErrorInterceptor = () => {
   const showError = useErrorHandler();
 
+  const errorMessages = {
+    400: "Requisição inválida. Verifique os parâmetros enviados.",
+    401: "Não autorizado. Verifique suas credenciais.",
+    403: "Proibido. Você não tem permissão para acessar este recurso.",
+    404: "Recurso não encontrado. Verifique a URL.",
+    500: "Erro interno do servidor. Tente novamente mais tarde.",
+    408: "Tempo de resposta excedido. Tente novamente.",
+    429: "Limite de requisições atingido. Tente novamente mais tarde.",
+  };
+
   axiosSetting.interceptors.response.use(
     (response) => response,
     (error) => {
       let errorMessage = "";
 
       if (error.response) {
-        switch (error.response.status) {
-          case 400:
-            errorMessage =
-              "Requisição inválida. Verifique os parâmetros enviados.";
-            break;
-          case 401:
-            errorMessage = "Não autorizado. Verifique suas credenciais.";
-            break;
-          case 403:
-            errorMessage =
-              "Proibido. Você não tem permissão para acessar este recurso.";
-            break;
-          case 404:
-            errorMessage = "Recurso não encontrado. Verifique a URL.";
-            break;
-          case 500:
-            errorMessage =
-              "Erro interno do servidor. Tente novamente mais tarde.";
-            break;
-          case 408:
-            errorMessage = "Tempo de resposta excedido. Tente novamente.";
-            break;
-          case 429:
-            errorMessage =
-              "Limite de requisições atingido. Tente novamente mais tarde.";
-            break;
-          default:
-            errorMessage = `Erro inesperado: ${error.response.status} - ${error.response.statusText}`;
-        }
+        errorMessage = errorMessages[error.response.status] ||
+          `Erro inesperado: ${error.response.status} - ${error.response.statusText}`;
       } else if (error.request) {
-        errorMessage =
-          "Sem resposta do servidor. Verifique sua conexão de internet.";
+        errorMessage = "Sem resposta do servidor. Verifique sua conexão de internet.";
       } else {
         errorMessage = "Erro ao configurar a requisição: " + error.message;
       }
